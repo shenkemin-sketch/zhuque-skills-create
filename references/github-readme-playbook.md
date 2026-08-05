@@ -83,7 +83,7 @@ npx skills add OWNER/REPO
 验证：
 
 ```bash
-ls "${CODEX_HOME:-$HOME/.codex}/skills/skill-name"
+ls "$HOME/.agents/skills/skill-name"
 ```
 
 ## 你可以这样说
@@ -125,7 +125,7 @@ Published: https://github.com/OWNER/example-skill
 |---|---|---|
 | `No valid skills found` | YAML frontmatter 不合法 | 使用 `description: |` 块标量 |
 | `gh: not authenticated` | GitHub CLI 未登录 | 运行 `gh auth login` |
-| 找不到 skill | 安装目录不一致 | 检查 `${CODEX_HOME:-$HOME/.codex}/skills/<name>` |
+| 找不到 skill | 安装目录不一致 | 检查 `$HOME/.agents/skills/<name>`；旧版手动安装再检查 `${CODEX_HOME:-$HOME/.codex}/skills/<name>` |
 
 ## 致谢
 

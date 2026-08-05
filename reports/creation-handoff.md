@@ -1,6 +1,6 @@
 # Creation Handoff
 
-Package: `zhuque-skills-create` 0.2.0
+Package: `zhuque-skills-create` 0.2.1
 Status: independent local project, 朱雀 AI adaptation
 
 ## 1. Result

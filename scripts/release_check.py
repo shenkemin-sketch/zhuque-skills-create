@@ -60,6 +60,15 @@ def run(command: list[str], cwd: Path, timeout: float = 120.0, env: dict[str, st
     }
 
 
+def installed_skill_entrypoints(home: Path, codex_home: Path, skill_name: str) -> list[Path]:
+    """Return current universal-agent and legacy Codex install entrypoints."""
+    candidates = [
+        home / ".agents" / "skills" / skill_name / "SKILL.md",
+        codex_home / "skills" / skill_name / "SKILL.md",
+    ]
+    return list(dict.fromkeys(path.resolve() for path in candidates))
+
+
 def scan_secrets(root: Path) -> list[dict[str, Any]]:
     findings: list[dict[str, Any]] = []
     for path in root.rglob("*"):
@@ -241,9 +250,15 @@ def evaluate(root: Path, phase: str, run_tests: bool, install_check: bool) -> di
                 timeout=300,
                 env=env,
             )
-            installed = temp_home / ".codex" / "skills" / name / "SKILL.md"
-            evidence = {**install, "installed_entrypoint": str(installed), "entrypoint_exists": installed.is_file()}
-            gate(gates, "clean_install", "pass" if install["ok"] and installed.is_file() else "block", evidence)
+            candidates = installed_skill_entrypoints(temp_home, Path(env["CODEX_HOME"]), name)
+            installed = next((path for path in candidates if path.is_file()), None)
+            evidence = {
+                **install,
+                "installed_entrypoints_checked": [str(path) for path in candidates],
+                "installed_entrypoint": str(installed) if installed else None,
+                "entrypoint_exists": installed is not None,
+            }
+            gate(gates, "clean_install", "pass" if install["ok"] and installed else "block", evidence)
     else:
         gate(gates, "clean_install", "warn", {"missing_evidence": "rerun with --install-check after the target revision is remote"})
 

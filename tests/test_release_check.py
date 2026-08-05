@@ -52,6 +52,19 @@ class ReleaseCheckTest(unittest.TestCase):
         self.assertEqual(RELEASE.feature_branch_status("main", "published"), "pass")
         self.assertEqual(RELEASE.feature_branch_status("main", "pr"), "block")
 
+    def test_clean_install_accepts_current_and_legacy_codex_layouts(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            home = Path(directory)
+            codex_home = home / "custom-codex"
+            candidates = RELEASE.installed_skill_entrypoints(home, codex_home, "demo-skill")
+        self.assertEqual(
+            candidates,
+            [
+                (home / ".agents" / "skills" / "demo-skill" / "SKILL.md").resolve(),
+                (codex_home / "skills" / "demo-skill" / "SKILL.md").resolve(),
+            ],
+        )
+
     def test_behavior_spec_is_not_provider_evidence(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)

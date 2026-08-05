@@ -1,7 +1,7 @@
 # Prior-Art Research
 
 Research date: 2026-08-05
-Target: `zhuque-skills-create` 0.2.0
+Target: `zhuque-skills-create` 0.2.1
 
 ## Sources verified
 

@@ -207,8 +207,8 @@ npx skills add {github_owner}/{repo}
 
 ```bash
 npx skills add {github_owner}/{repo}
-test -f "${{CODEX_HOME:-$HOME/.codex}}/skills/{meta['name']}/SKILL.md"
-test -f "${{CODEX_HOME:-$HOME/.codex}}/skills/{meta['name']}/agents/openai.yaml"
+test -f "$HOME/.agents/skills/{meta['name']}/SKILL.md"
+test -f "$HOME/.agents/skills/{meta['name']}/agents/openai.yaml"
 ```
 
 ## 前置条件
