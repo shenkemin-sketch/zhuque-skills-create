@@ -61,7 +61,7 @@ class PublishSkillTest(unittest.TestCase):
             )
             (root / "README.md").write_text(text, encoding="utf-8")
             self.assertEqual(PUBLISH.check_readme(root, upstream), [])
-            self.assertIn("CODEX_HOME", text)
+            self.assertIn("$HOME/.agents/skills/demo-skill", text)
             self.assertNotIn("profile", text.lower())
             self.assertNotIn("social", text.lower())
 

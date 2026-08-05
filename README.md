@@ -26,7 +26,7 @@ npx skills add shenkemin-sketch/zhuque-skills-create \
 验证 Codex 安装入口：
 
 ```bash
-test -f "${CODEX_HOME:-$HOME/.codex}/skills/zhuque-skills-create/SKILL.md"
+test -f "$HOME/.agents/skills/zhuque-skills-create/SKILL.md"
 ```
 
 ## 你可以直接这样说
@@ -87,14 +87,14 @@ python3 -m unittest discover -s tests -p 'test_*.py'
 | 问题 | 常见原因 | 处理方式 |
 |---|---|---|
 | `No valid skills found` | `SKILL.md` frontmatter 无效 | 运行 `python3 scripts/quick_validate.py .` 并修复错误 |
-| Codex 找不到 Skill | 安装目标或 Skill 名不一致 | 检查 `${CODEX_HOME:-$HOME/.codex}/skills/zhuque-skills-create` |
+| Codex 找不到 Skill | 安装目标或 Skill 名不一致 | 检查 `$HOME/.agents/skills/zhuque-skills-create`；旧版手动安装再检查 `${CODEX_HOME:-$HOME/.codex}/skills/zhuque-skills-create` |
 | `short_description must be 25-64 characters` | `agents/openai.yaml` 摘要长度不合规 | 调整 `interface.short_description` 后重新校验 |
 | GitHub 发布被阻断 | 分支、版本、密钥或报告门禁未通过 | 先运行 `python3 scripts/publish_skill.py . --dry-run` |
 | 触发评估通过但 Codex 没有自动调用 | 静态关键词评估不等于真实激活 | 用真实对话做前向测试，并把结果标为独立证据 |
 
-## 安装前状态
+## 发布状态
 
-当前仓库是独立本地项目。本阶段未自动安装到 Codex，也未创建或修改任何远程仓库。
+公开仓库：[shenkemin-sketch/zhuque-skills-create](https://github.com/shenkemin-sketch/zhuque-skills-create)。当前版本 `v0.2.1` 通过功能分支和 Pull Request 发布；发布门禁同时兼容最新版通用 Agent Skills 安装目录与旧版 Codex 本地目录。
 
 ## 来源与许可证
 
