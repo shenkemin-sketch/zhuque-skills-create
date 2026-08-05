@@ -1,0 +1,6 @@
+interface:
+  display_name: "朱雀 AI Skills Create"
+  short_description: "Preserve value and create Codex-native skills"
+  default_prompt: "Use $zhuque-skills-create to preserve what works and turn this repeated workflow into a lean, validated Codex skill."
+policy:
+  allow_implicit_invocation: true
