@@ -1,0 +1,44 @@
+{
+  "name": "zhuque-skills-create",
+  "version": "0.2.0",
+  "owner": "朱雀 AI",
+  "updated_at": "2026-08-06",
+  "status": "active",
+  "maturity_tier": "governed",
+  "lifecycle_stage": "independent-project",
+  "context_budget_tier": "production",
+  "review_cadence": "quarterly",
+  "upstream_inspiration": "See THIRD_PARTY_NOTICES.md",
+  "intent": {
+    "job_to_be_done": "Preserve useful mechanisms and turn repeated workflows or existing skills into lean Codex-native skills with proportional research, validation, and optional release gates.",
+    "target_users": ["朱雀 AI and Codex users who create and maintain reusable skills"],
+    "inputs": ["workflows", "prompts", "transcripts", "documents", "SOPs", "scripts", "notes", "existing skills"],
+    "outputs": ["Codex-native skill package", "validation evidence", "optional distribution project"],
+    "exclusions": ["one-off tasks", "ordinary documentation", "implicit publication", "personal brand injection"]
+  },
+  "project_defaults": {
+    "skill_name_prefix": "",
+    "max_skill_name_length": 64,
+    "language": "simplified-chinese-first-for-chinese-users",
+    "brand_identity": "朱雀 AI",
+    "brand_injection": "only-for-zhuque-ai-owned-or-explicitly-branded-output",
+    "publication": "explicit-only"
+  },
+  "target_platforms": ["openai-codex"],
+  "factory_components": ["references", "scripts", "evals", "reports"],
+  "release_gates": [
+    "codex_quick_validation",
+    "openai_yaml_alignment",
+    "value_preservation_before_adaptation",
+    "zhuque_ai_brand_scope",
+    "prior_art_research_when_material",
+    "single_root_entrypoint",
+    "trigger_lint_evidence_boundary",
+    "context_budget_validation",
+    "secret_scan",
+    "feature_branch_only_publication",
+    "released_version_immutability",
+    "github_release_verification",
+    "isolated_clean_install"
+  ]
+}

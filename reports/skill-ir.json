@@ -1,0 +1,202 @@
+{
+  "schema_version": "1.0.0-zhuque-codex",
+  "generated_at": "2026-08-06",
+  "package": {
+    "name": "zhuque-skills-create",
+    "version": "0.2.0",
+    "owner": "朱雀 AI",
+    "maturity_tier": "governed",
+    "lifecycle_stage": "independent-project",
+    "upstream_inspiration": "See THIRD_PARTY_NOTICES.md",
+    "upstream_sync": {}
+  },
+  "intent": {
+    "description": "Research, create, improve, migrate, validate, and optionally publish Codex-native skills from workflows, prompts, transcripts, documents, SOPs, scripts, notes, or existing skills. Use when a reusable Codex skill should be created or materially updated, when useful mechanisms must be preserved during identity or workflow adaptation, when trigger and output boundaries need evaluation, or when a skill needs Codex metadata, release gates, or installation verification. Exclude one-off summaries, translations, ordinary documentation, non-skill package publishing, and requests that explicitly should not become a skill.",
+    "job_to_be_done": "Preserve useful mechanisms and turn repeated workflows or existing skills into lean Codex-native skills with proportional research, validation, and optional release gates.",
+    "target_users": [
+      "朱雀 AI and Codex users who create and maintain reusable skills"
+    ],
+    "inputs": [
+      "workflows",
+      "prompts",
+      "transcripts",
+      "documents",
+      "SOPs",
+      "scripts",
+      "notes",
+      "existing skills"
+    ],
+    "outputs": [
+      "Codex-native skill package",
+      "validation evidence",
+      "optional distribution project"
+    ],
+    "exclusions": [
+      "one-off tasks",
+      "ordinary documentation",
+      "implicit publication",
+      "personal brand injection"
+    ],
+    "project_defaults": {
+      "skill_name_prefix": "",
+      "max_skill_name_length": 64,
+      "language": "simplified-chinese-first-for-chinese-users",
+      "brand_identity": "朱雀 AI",
+      "brand_injection": "only-for-zhuque-ai-owned-or-explicitly-branded-output",
+      "publication": "explicit-only"
+    }
+  },
+  "triggers": {
+    "should_trigger": [
+      "把这个流程整理成一个 Codex skill",
+      "基于这个开源 skill 优化升级 zhuque-skills-create",
+      "先保留这个旧 skill 里真正有用的能力，再改造成符合朱雀 AI 的 Codex skill",
+      "优化这个已有 skill，补一下 trigger eval 和发布门禁",
+      "把这套 SOP、脚本和提示词封装成团队可复用的 agent 能力",
+      "Create a Codex skill from this repeated workflow and package it for team reuse.",
+      "Refactor this prompt collection into a governed reusable skill package with evals.",
+      "先搜索 skill 目录，找安装量最高、口碑证据强的相关能力，学习后创建一个更好的 Codex skill",
+      "Research the strongest existing agent skills, then synthesize an original Codex skill without copying them.",
+      "把这个旧 skill 迁移成新的可安装格式，并检查递归发现和安装入口",
+      "审计这个 Codex skill 的路由边界和输出评估，只给发现和修复建议，先不要改文件",
+      "Check whether this agent skill package installs cleanly and whether nested examples can be mis-discovered.",
+      "把这个 Codex skill 发布到 GitHub，并完成 PR、Release 和干净安装验证",
+      "先 dry-run 检查这个 Codex skill 的 README、版本和发布条件，不要写 GitHub",
+      "把这个 Codex skill 直接推 main 发布，如果不安全就改成规范 PR 流程"
+    ],
+    "should_not_trigger": [
+      "解释一下什么是 agent skill，不要做成 skill",
+      "把这篇文章翻译一下",
+      "帮我写个产品标题",
+      "Summarize this random note in three bullets.",
+      "Just explain the difference between prompts and skills.",
+      "把这个普通 Python 包发布到 PyPI"
+    ],
+    "near_neighbor": [
+      "帮我看一下这个 README 顺不顺，但不要改成 skill",
+      "头脑风暴几个插件名字，先不要打包发布",
+      "给这个脚本加一个 argparse 参数"
+    ]
+  },
+  "workflow": {
+    "routing_rules": [
+      "Route by the frontmatter `description` before reading the body.",
+      "Once selected, act as the single skill-authoring authority. Do not invoke another creator unless the user explicitly requests a comparison or this skill cannot complete the task.",
+      "Keep audit, evaluation, and diagnosis requests read-only. Edit only for create, update, migrate, or package requests. Publish only after an explicit publish request.",
+      "Reject one-off summaries, translations, explanations, and brainstorming as skill candidates unless a stable repeated workflow is demonstrated.",
+      "Keep exactly one discoverable root `SKILL.md`. Name embedded examples `SKILL.example.md` and test fixtures `SKILL.fixture.md`.",
+      "For migration or rebranding, classify existing parts as `keep`, `adapt`, `remove`, or `add` before editing. Never equate debranding with deleting useful mechanisms.",
+      "Use the 朱雀 AI identity only for 朱雀 AI-owned or explicitly branded output. Do not inject social links, QR codes, profile assets, or naming prefixes without supplied source material."
+    ],
+    "creation_workflow": [
+      "Decide whether the request represents a stable repeated job. If not, answer directly and create no skill.",
+      "For an existing Skill, inventory its useful mechanisms and classify them as `keep`, `adapt`, `remove`, or `add` before changing files.",
+      "Capture the recurring job, target users, real inputs, finished output, exclusions, permissions, existing assets, destination, brand scope, and publication intent.",
+      "Collect two or three realistic examples and at least one near-neighbor that should not trigger.",
+      "Choose the lightest valid mode.",
+      "Research prior art when the design is new, material, public, or high-risk; otherwise record why it is unnecessary.",
+      "Plan only the reusable scripts, references, and assets earned by the examples.",
+      "For a new skill, run the bundled Codex initializer:",
+      "Replace all TODOs, remove unused placeholders and directories, and implement the smallest complete workflow.",
+      "Test every added script by running it. Test a representative sample only when many scripts are mechanically similar.",
+      "Run the official Codex quick validator and the extended project validator:",
+      "For Production or higher, add realistic should-trigger, should-not-trigger, and near-neighbor cases. Treat `trigger_eval.py` as static lint, not proof of real Codex activation.",
+      "Forward-test complex skills on realistic tasks with fresh context. Pass raw inputs and the skill, not the intended answer, diagnosis, or expected fix.",
+      "Add with-skill versus baseline output evaluation only when correctness, safety, persuasion, or repeatability justifies it.",
+      "Produce a concise handoff with preserved value, 朱雀 AI adaptations, reference skills studied, candidate-specific lessons, design advantages, validated advantages, hypotheses, and missing evidence."
+    ],
+    "evidence_rules": [
+      "Static validation proves package shape, not output quality.",
+      "Recorded fixtures prove reproducibility, not provider-backed model performance.",
+      "Static trigger lint proves description/case alignment, not real Codex invocation accuracy.",
+      "Human blind review counts only when the reviewer, time, decision, rubric reason, and answer isolation are recorded.",
+      "Preview, generated files, successful commands, PR creation, merge, Release, and clean installation are distinct states."
+    ],
+    "output_contract": [
+      "a working skill directory with one root `SKILL.md`",
+      "an aligned `agents/openai.yaml`",
+      "only the scripts, references, and assets needed by the workflow",
+      "validation results and any realistic test evidence",
+      "explicit missing evidence and permission boundaries"
+    ]
+  },
+  "resources": {
+    "references": [
+      "references/creation-handoff.md",
+      "references/eval-playbook.md",
+      "references/gate-selection.md",
+      "references/github-readme-playbook.md",
+      "references/governance.md",
+      "references/intent-dialogue.md",
+      "references/non-skill-decision-tree.md",
+      "references/openai_yaml.md",
+      "references/operating-modes.md",
+      "references/output-eval-method.md",
+      "references/prior-art-research.md",
+      "references/publishing.md",
+      "references/qa-ladder.md",
+      "references/resource-boundaries.md",
+      "references/review-release-gates.md",
+      "references/skill-archetypes.md",
+      "references/skill-engineering-method.md",
+      "references/skill-ir-method.md",
+      "references/skillops-loop.md"
+    ],
+    "scripts": [
+      "scripts/export_skill_ir.py",
+      "scripts/generate_openai_yaml.py",
+      "scripts/init_skill.py",
+      "scripts/publish_skill.py",
+      "scripts/quick_validate.py",
+      "scripts/release_check.py",
+      "scripts/research_prior_art.py",
+      "scripts/search_skillsmp.py",
+      "scripts/trigger_eval.py",
+      "scripts/validate_skill.py"
+    ],
+    "evals": [
+      "evals/trigger_cases.json"
+    ],
+    "reports": [
+      "reports/creation-handoff.md",
+      "reports/prior-art-research.md",
+      "reports/skill-ir.json",
+      "reports/trigger-eval.json",
+      "reports/zhuque-ai-adaptation.md"
+    ]
+  },
+  "portability": {
+    "target_platforms": [
+      "openai-codex"
+    ],
+    "interface": {
+      "display_name": "朱雀 AI Skills Create",
+      "short_description": "Preserve value and create Codex-native skills",
+      "default_prompt": "Use $zhuque-skills-create to preserve what works and turn this repeated workflow into a lean, validated Codex skill."
+    },
+    "policy": {
+      "allow_implicit_invocation": true
+    }
+  },
+  "gates": [
+    "codex_quick_validation",
+    "openai_yaml_alignment",
+    "value_preservation_before_adaptation",
+    "zhuque_ai_brand_scope",
+    "prior_art_research_when_material",
+    "single_root_entrypoint",
+    "trigger_lint_evidence_boundary",
+    "context_budget_validation",
+    "secret_scan",
+    "feature_branch_only_publication",
+    "released_version_immutability",
+    "github_release_verification",
+    "isolated_clean_install"
+  ],
+  "evidence_boundary": {
+    "generated_reports_are_evidence": true,
+    "planned_work_is_evidence": false,
+    "missing_external_or_human_evidence_label": "missing evidence",
+    "public_claim_policy": "claim only what local validation, install proof, human review, or provider-backed evidence actually supports"
+  }
+}
